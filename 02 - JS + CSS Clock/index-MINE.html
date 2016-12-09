@@ -118,13 +118,17 @@
 		const now = new Date();
 
 		const secondsDegrees = toDegs(now.getSeconds(), 60);
+		// Hack: prevent flicker around 90deg
 		if (secondsDegrees === 90) {
-			secondsHand.classList.add('hand-nospin');	
+			secondsHand.classList.add('hand-nospin');
+			secondsCircle.classList.add('hand-nospin');
 		}
 		secondsHand.style.transform = `rotate(${secondsDegrees}deg)`;
 		secondsCircle.style.transform = `rotate(${secondsDegrees}deg)`;
-		if (secondsDegrees === 90) {
+		// Hack: restore wobbly animation past 90deg
+		if (secondsDegrees > 90) {
 			secondsHand.classList.remove('hand-nospin');
+			secondsCircle.classList.remove('hand-nospin');
 		}
 
 		const minutesDegrees = toDegs(now.getMinutes(), 60);
