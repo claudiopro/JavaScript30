@@ -19,3 +19,4 @@ Thank!
 1. [01 - JavaScript Drum Kit](./01 - JavaScript Drum Kit/index-MINE.html)
 1. [02 - JS + CSS Clock](./02 - JS + CSS Clock/index-MINE.html)
 1. [03 - CSS Variables](./03 - CSS Variables/index-MINE.html)
+1. [04 - Array Cardio Day 1](./Array Cardio Day 1/index-MINE.html)
