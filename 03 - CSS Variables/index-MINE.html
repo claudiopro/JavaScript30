@@ -73,10 +73,10 @@
 
     function changeValue(e) {
       const prop = this.name,
-        newVal = `${this.value}${this.dataset.sizing ? this.dataset.sizing : ''}`;
+        newVal = `${this.value}${this.dataset.sizing || ''}`;
 
-      // The proposed solution modifies the body rule directly
-      // document.querySelector('body').style.setProperty(`--${this.name}`, newVal);
+      // The proposed solution modifies inline styles directly
+      // document.documentElement.style.setProperty(`--${this.name}`, newVal);
 
       // We modify the original :root rule directly, so it cascades nicely
       Array.from(document.styleSheets[0].cssRules).forEach(rule => {
