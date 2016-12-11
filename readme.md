@@ -20,3 +20,4 @@ Thank!
 1. [02 - JS + CSS Clock](./02 - JS + CSS Clock/index-MINE.html)
 1. [03 - CSS Variables](./03 - CSS Variables/index-MINE.html)
 1. [04 - Array Cardio Day 1](./04 - Array Cardio Day 1/index-MINE.html)
+1. [05 - Flex Panel Gallery](./05 - Flex Panel Gallery/index-MINE.html)
