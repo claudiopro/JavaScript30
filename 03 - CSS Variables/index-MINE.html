@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scoped CSS Variables and JS</title>
+</head>
+<body>
+  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+
+  <div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input type="range" name="padding" min="10" max="200" value="10" data-sizing="px">
+
+    <label for="blur">Blur:</label>
+    <input type="range" name="blur-radius" min="0" max="25" value="10" data-sizing="px">
+
+    <label for="base">Base Color</label>
+    <input type="color" name="accent-color" value="#ffc600">
+  </div>
+
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+
+  <style>
+
+    :root {
+      --accent-color: #ffc600;
+      --padding: 10px;
+      --blur-radius: 10px;
+    }
+
+    img {
+      background: var(--accent-color);
+      padding: var(--padding);
+      filter: blur(var(--blur-radius));
+    }
+
+    .hl {
+      color: var(--accent-color);
+    }
+
+    /*
+      misc styles, nothing to do with CSS variables
+    */
+
+    body {
+      text-align: center;
+    }
+
+    body {
+      background: #193549;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+
+    .controls {
+      margin-bottom: 50px;
+    }
+
+    a {
+      color: var(--base);
+      text-decoration: none;
+    }
+
+    input {
+      width:100px;
+    }
+  </style>
+
+  <script>
+    const controls = document.querySelectorAll('.controls input');
+
+    function changeValue(e) {
+      const prop = this.name,
+        newVal = `${this.value}${this.dataset.sizing ? this.dataset.sizing : ''}`;
+
+      // The proposed solution modifies the body rule directly
+      // document.querySelector('body').style.setProperty(`--${this.name}`, newVal);
+
+      // We modify the original :root rule directly, so it cascades nicely
+      Array.from(document.styleSheets[0].cssRules).forEach(rule => {
+        if (rule.selectorText === ':root') {
+          rule.style.setProperty(`--${prop}`, newVal);
+        }
+      });
+    }
+
+    controls.forEach(control => {
+      control.addEventListener('change', changeValue);
+      control.addEventListener('mousemove', changeValue);
+    })
+  </script>
+
+</body>
+</html>
