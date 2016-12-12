@@ -11,13 +11,6 @@
 	const canvas = document.querySelector('#draw');
 	const ctx = canvas.getContext('2d');
 
-	setTimeout(() => {
-		ctx.strokeStyle = '#ff0000';
-		ctx.lineCap = 'round';
-		ctx.lineJoin = 'round';
-		ctx.lineWidth = 1;
-	}, 0);
-
 	let isDrawing = false,
 		lastX = 0,
 		lastY = 0,
@@ -54,6 +47,10 @@
 
 	function resizeCanvas(e) {
 		[canvas.width, canvas.height] = [window.innerWidth, window.innerHeight];
+		ctx.strokeStyle = '#ff0000';
+		ctx.lineCap = 'round';
+		ctx.lineJoin = 'round';
+		ctx.lineWidth = 1;
 	}
 
 	canvas.addEventListener('mouseup', e => isDrawing = false);
