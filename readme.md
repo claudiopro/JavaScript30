@@ -12,7 +12,7 @@ These are meant to be 1:1 copies of what is done in the video. If you found a be
 
 The starter files + solutions will be updated if/when the videos are updated. 
 
-Thank!
+Thanks!
 
 # Solutions by [Claudio](https://github.com/claudiopro)
 
@@ -21,3 +21,4 @@ Thank!
 1. [03 - CSS Variables](./03 - CSS Variables/index-MINE.html)
 1. [04 - Array Cardio Day 1](./04 - Array Cardio Day 1/index-MINE.html)
 1. [05 - Flex Panel Gallery](./05 - Flex Panel Gallery/index-MINE.html)
+1. [06 - Type Ahead](./06 - Type Ahead/index-MINE.html)
