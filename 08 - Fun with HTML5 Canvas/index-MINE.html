@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script>
+
+	const canvas = document.querySelector('#draw');
+	const ctx = canvas.getContext('2d');
+
+	setTimeout(() => {
+		ctx.strokeStyle = '#ff0000';
+		ctx.lineCap = 'round';
+		ctx.lineJoin = 'round';
+		ctx.lineWidth = 1;
+	}, 0);
+
+	let isDrawing = false,
+		lastX = 0,
+		lastY = 0,
+		hue = 0,
+		direction = 1;
+
+	function draw(e) {
+		if (!isDrawing) {
+			return;
+		}
+
+		hue++;
+		if (hue >= 360) {
+			hue = 0;
+		}
+		if (ctx.lineWidth > 100 || ctx.lineWidth <= 1) {
+			direction *= -1;
+		}
+
+		ctx.lineWidth += direction;
+
+		// Drain current x and y values from mouse event
+		let {offsetX: x, offsetY: y} = e;
+
+		ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+		ctx.beginPath();
+		ctx.moveTo(lastX, lastY);
+		ctx.lineTo(x, y);
+		ctx.stroke();
+
+		// Update last x and y values
+		[lastX, lastY] = [x, y];
+	}
+
+	function resizeCanvas(e) {
+		[canvas.width, canvas.height] = [window.innerWidth, window.innerHeight];
+	}
+
+	canvas.addEventListener('mouseup', e => isDrawing = false);
+	canvas.addEventListener('mouseout', e => isDrawing = false);
+	canvas.addEventListener('mousedown', e => {
+		[lastX, lastY] = [e.offsetX, e.offsetY];
+		isDrawing = true;
+	});
+	canvas.addEventListener('mousemove', draw);
+
+	window.addEventListener('resize', resizeCanvas);
+
+	resizeCanvas();
+</script>
+
+<style>
+  html, body {
+    margin:0;
+  }
+</style>
+
+</body>
+</html>
