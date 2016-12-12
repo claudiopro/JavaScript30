@@ -6,6 +6,8 @@ Starter Files + Completed solutions for the JavaScript 30 Day Challenge.
 
 Grab the course at [https://JavaScript30.com](https://JavaScript30.com)
 
+Text-based guides (unofficial) for the challenges can be found here - [Text Guides](https://github.com/nitishdayal/JavaScript30).
+
 ## Pull Requests
 
 These are meant to be 1:1 copies of what is done in the video. If you found a better / different way to do things, great, but I will be keeping them the same as the videos. 
@@ -22,3 +24,4 @@ Thanks!
 1. [04 - Array Cardio Day 1](./04 - Array Cardio Day 1/index-MINE.html)
 1. [05 - Flex Panel Gallery](./05 - Flex Panel Gallery/index-MINE.html)
 1. [06 - Type Ahead](./06 - Type Ahead/index-MINE.html)
+1. [07 - Array Cardio Day 2](./07 - Array Cardio Day 2/index-MINE.html)
