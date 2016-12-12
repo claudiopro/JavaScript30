@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+
+/*
+ * Promise-based fetcher function that caches the result on first call
+ */
+function fetchEntries() {
+	if (!entries.length) {
+		/*
+		 * First time I am invoked, fetch data, convert to JSON and push into array,
+		 * then return the promise
+		 */
+		return fetch(endpoint)
+			// Converts returned data to JSON
+			.then(blob => blob.json())
+			// Pushes into entries array using spread operator
+			.then(data => {
+				entries.push(...data);
+				return entries;
+			});
+	}
+
+	/*
+	 * Data is already in the entries array, simply return a resolved promise
+	 */
+	return new Promise((resolve, reject) => {
+		resolve(entries);
+	});
+}
+
+/*
+ * High order function returning a comparator that looks for the typed
+ * value in city or state name 
+ */
+function compare(value) {
+	var regex = new RegExp(value, 'gi');
+
+	// Returns true if the value is matched in city or state name
+	return (entry) => (entry.city.match(regex) || entry.state.match(regex));
+}
+
+/*
+ * Formats a number with a comma to separate groups of thousands
+ */
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+/*
+ * High order function returning an appender that highlights the given value
+ */
+function appendMatches(value) {
+	var regex = new RegExp(value, 'gi');
+
+	return (matches) => {
+		results.innerHTML = matches
+			.map(match => {
+				const population = match.population,
+					cityName = match.city.replace(regex, `<span class="hl">${value}</span>`),
+					stateName = match.state.replace(regex, `<span class="hl">${value}</span>`);
+
+				return `
+					<li>
+						<span class="name">${cityName}, ${stateName}</span>
+						<span class="population">${numberWithCommas(population)}</span>
+					</li>
+				`;
+			})
+			.join('');
+	};
+}
+
+/*
+ * Event handler for the typeahead, fetches results, then filters them to match
+ * the field's value, and then appends them to the list
+ */
+function displayMatches(/* ignored */ e) {
+	fetchEntries()
+		.then(cities => cities.filter(compare(this.value)))
+		.then(appendMatches(this.value));
+}
+
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json',
+	entries = [],
+	searchBox = document.querySelector('.search'),
+	results = document.querySelector('.suggestions');
+
+searchBox.addEventListener('change', displayMatches);
+searchBox.addEventListener('keyup', displayMatches);
+
+</script>
+  </body>
+</html>
