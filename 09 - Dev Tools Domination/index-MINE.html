@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // clearing
+    console.clear();
+
+    // Regular
+    console.log('Hello');
+
+    // Interpolated
+    const name = 'Claudio';
+    console.log('Hello, %s!', name);
+    // Or:
+    // console.log(`Hello, ${name}!`);
+
+    // Styled
+    console.log('%c I am a styled string', 'font-family: "Comic Sans"; color: blue; text-shadow: 1px 1px 3px gray; font-size: 24px');
+
+    // Let's add a rainbow gradient sine text shadow 🌈
+    const gradient = Array.from(Array(360)) // Create an array with 360 elements from an empty array of length 360
+    	.map((_, i) => i) // Create an array with indices as elements (ignore the undefined elements)
+    	.map(val => `${-1 + 100 * (val / 360)}px ${-1 + 20 * Math.sin(2 * Math.PI * val / 360)}px 4px hsl(${val},100%,50%)`) // Create a list of text shadow rules with a sine Y offset
+    	.join(','); // Join into a comma separated string
+    console.log('%c Have a great day!', `padding-left: 120px; font-size: 20px; color: #fff; text-shadow: ${gradient}`);
+
+    // warning!
+    console.warn('This is a friendly warning 😘');
+
+    // Error :|
+    console.error('It is fine to make errors 😇');
+
+    // Info
+    console.info('The world as we know it was built on trial and error 😎');
+
+    // Testing
+    console.assert(2 + 2 === 4, 'It seems you are living in a different universe! 🤔');
+
+    // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.dir(p);
+
+    // Grouping together
+    dogs.forEach(dog => {
+    	console.group(dog.name);
+    	console.log(`Hi, I am ${dog.name} 🐶`);
+    	console.log(`I am ${dog.age} dog years old 🐕`);
+    	console.log(`That means I am ${dog.age * 7} human years old 🐩`);
+    	if (dog.age > 7) {
+	    	console.log(`Wow I am a really old dog 🙈`);
+	    }
+    	console.groupEnd(dog.name);
+    });
+
+    // Tabular display of an array of objects
+    console.table(dogs);
+
+    // counting
+    const words = [];
+    for (let i = 0; i < 10; i++) {
+    	words.push(i % 3 ? 'Dog' : 'Cat');
+    }
+    words.forEach(word => console.count(word));
+
+    // timing
+    const benchmark = 'fetch profile data from GitHub';
+    console.time(benchmark);
+    fetch('https://api.github.com/users/claudiopro')
+    	.then(data => data.json())
+    	.then(data => {
+    		console.timeEnd(benchmark);
+    		console.log(`Hi, ${data.name}!`);
+    	});
+
+  </script>
+</body>
+</html>
