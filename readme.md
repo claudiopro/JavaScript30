@@ -27,7 +27,7 @@ Thanks!
 - [x] ~~[07 - Array Cardio Day 2](./07 - Array Cardio Day 2/index-MINE.html)~~
 - [x] ~~[08 - Fun with HTML5 Canvas](./08 - Fun with HTML5 Canvas/index-MINE.html)~~
 - [x] ~~[09 - Dev Tools Domination](./09 - Dev Tools Domination/index-MINE.html)~~
-- [x] ~~[10 - Hold Shift and Check Checkboxes](./10 - Hold Shift and Check Checkboxes/-dex-MINE.html)~~
+- [x] ~~[10 - Hold Shift and Check Checkboxes](./10 - Hold Shift and Check Checkboxes/index-MINE.html)~~
 - [ ] [11 - Custom Video Player](./11 - Custom Video Player/index-MINE.html)
 - [ ] [12 - Key Sequence Detection](./12 - Key Sequence Detection/index-MINE.html)
 - [ ] [13 - Slide in on Scroll](./13 - Slide in on Scroll/index-MINE.html)
